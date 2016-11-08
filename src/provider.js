@@ -10,7 +10,7 @@ export class Provider {
     this.config = config;
   }
 
-  signin({ signin_uri, scope, state, response_type }, callback) {
+  signin({ signin_uri, scope, state, response_type, approval_prompt }, callback) {
     const { id, redirect_uri } = this.config;
     const params = {
       client_id: id,
@@ -24,6 +24,9 @@ export class Provider {
     }
     if (state) {
       params.state = state;
+    }
+    if (approval_prompt) {
+      params.approval_prompt = approval_prompt;
     }
     if (!params.client_id || !params.redirect_uri) {
       callback(`Invalid sign in params. ${params.client_id} ${params.redirect_uri}`);
