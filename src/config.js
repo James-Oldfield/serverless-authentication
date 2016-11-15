@@ -64,5 +64,10 @@ export function config(options) {
     process.env.REDIRECT_URI = `https://${host}/${stage}/authentication/callback/{provider}`;
   }
 
+  // Allow staging-based redirect client URIs
+  if (!process.env.REDIRECT_CLIENT_URI) {
+    process.env.REDIRECT_CLIENT_URI = process.env[`${stage}_REDIRECT_CLIENT_URI`];
+  }
+
   return (new Config()).getConfig(provider);
 }
