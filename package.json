@@ -1,6 +1,6 @@
 {
   "name": "serverless-authentication",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "main": "lib/index.js",
   "license": "MIT",
   "private": false,
