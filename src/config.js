@@ -62,15 +62,11 @@ export function config(options) {
     locale = options.locale;
   }
 
-  if (!process.env.REDIRECT_URI) {
-    process.env.REDIRECT_URI = `https://${host}/${stage}/authentication/callback/{provider}/${locale}`;
-  }
+  process.env.REDIRECT_URI = `https://${host}/${stage}/authentication/callback/{provider}/${locale}`;
 
   // Allow staging-based redirect client URIs
-  if (!process.env.REDIRECT_CLIENT_URI) {
-    const localeIfy = process.env[`${stage}_REDIRECT_CLIENT_URI`];
-    process.env.REDIRECT_CLIENT_URI = localeIfy.replace('{locale}', locale);
-  }
+  const localeIfy = process.env[`${stage}_REDIRECT_CLIENT_URI`];
+  process.env.REDIRECT_CLIENT_URI = localeIfy.replace('{locale}', locale);
 
   return (new Config()).getConfig(provider);
 }
