@@ -51,6 +51,7 @@ export function config(options) {
   let provider;
   let host;
   let stage;
+  let locale;
   // fallback -- remove on version upgrade
   if (typeof (options) === 'string') {
     provider = options;
@@ -58,10 +59,11 @@ export function config(options) {
     provider = options.provider;
     host = options.host;
     stage = options.stage;
+    locale = options.locale;
   }
 
   if (!process.env.REDIRECT_URI) {
-    process.env.REDIRECT_URI = `https://${host}/${stage}/authentication/callback/{provider}`;
+    process.env.REDIRECT_URI = `https://${host}/${stage}/authentication/callback/{provider}/${locale}`;
   }
 
   // Allow staging-based redirect client URIs
