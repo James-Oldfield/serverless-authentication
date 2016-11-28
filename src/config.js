@@ -68,7 +68,8 @@ export function config(options) {
 
   // Allow staging-based redirect client URIs
   if (!process.env.REDIRECT_CLIENT_URI) {
-    process.env.REDIRECT_CLIENT_URI = process.env[`${stage}_REDIRECT_CLIENT_URI`];
+    process.env.REDIRECT_CLIENT_URI =
+      process.env[`${stage}_REDIRECT_CLIENT_URI`].replace('{locale}', locale);
   }
 
   return (new Config()).getConfig(provider);
